@@ -13,11 +13,11 @@
 <form th:action="@{/register}" th:object="${user}" method="post">
 <input type="hidden" th:field="*{id}"/>
 User Name <br/>
-<input type="text" th:field="*{name}"/>
+<input type="email" th:field="*{username}"/>
 <br/>
-E-mail <br/>
+<!-- E-mail <br/>
 <input type="text" th:field="*{email}"/>
-<br/>
+<br/> -->
 Password <br/>
 <input type="password" th:field="*{password}"/>
 <br/>

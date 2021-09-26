@@ -3,11 +3,15 @@ package com.joaquinlw.testensolvers.models.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,6 +33,10 @@ public class Item implements Serializable{
 	private String name;
 	
 	private boolean done;
+	
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="folder_id")
+	private Folder folder;
 	
 	@Column(name="createdAt")
 	@Temporal(TemporalType.DATE)
@@ -84,6 +92,19 @@ public class Item implements Serializable{
 		this.createdAt = createdAt;
 	}
 	
+	
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		createdAt = new Date();

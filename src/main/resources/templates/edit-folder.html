@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+	crossorigin="anonymous">
+
+<title>Edit Folder</title>
+</head>
+<body>
+	<h1 th:text="${title}"></h1>
+	<br />
+	<br />
+	<div class="container col-md6">
+		<div class="card border-primary">
+			<div class="card-header text-center">Edit Folder</div>
+			<div class="card-body text-center">
+				<form th:action="@{/folders/edit/} + ${folder.id}"
+					th:object="${folder}" method="post">
+					<p>Enter New Folder's Name:</p>
+					<br /> 
+					<input class="col-md-6 text-center" type="text" th:field="*{name}" /> 
+					<input type="hidden" th:field="*{id}"/> <br />
+					<input type="submit" value="Upate Folder">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

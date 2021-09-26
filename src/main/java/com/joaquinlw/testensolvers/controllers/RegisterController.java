@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.joaquinlw.testensolvers.models.dao.IUsersDao;
 import com.joaquinlw.testensolvers.models.entities.User;
+import com.joaquinlw.testensolvers.models.services.IUserService;
 
 @Controller
 public class RegisterController {
 	
 	@Autowired
-	private IUsersDao userDao;
+	private IUserService userService;
 	
 	@GetMapping({"/register"})
 	public String index(Map<String, Object> model) {
@@ -28,7 +29,8 @@ public class RegisterController {
 	
 	@PostMapping("/register")
 	public String store(User user) {
-		userDao.saveUser(user);
+		
+		userService.saveUser(user);
 		return "redirect:index";
 	}
 

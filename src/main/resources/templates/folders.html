@@ -8,10 +8,10 @@
 	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
 	crossorigin="anonymous">
 
-<title>Items View</title>
+<title>Folders View</title>
 </head>
 <body>
-	<h1>Items List</h1>
+	<h1>Folders List</h1>
 	<br />
 	<br />
 
@@ -23,9 +23,9 @@
 		<tr th:each="fold: ${folders}">
 			<td th:text="${fold.name}"></td>
 			<td>
-				<button th:action="@{/folders/} + ${fold.id}" class="btn btn-success">See Folder</button>
-				<button th:action="@{/folders/edit/} + ${fold.id}" class="btn btn-warning">Edit</button>
-				<button th:action="@{/folders/delete} + ${fold.id}" class="btn btn-danger">Delete</button>
+				<a th:href="@{/items/} + ${fold.id}" class="btn btn-success">See Folder</a>
+				<a th:href="@{/folders/edit/} + ${fold.id}" class="btn btn-warning">Edit</a>
+				<a th:href="@{/folders/delete/} + ${fold.id}" class="btn btn-danger">Delete</a>
 			</td>
 		</tr>
 
@@ -34,7 +34,7 @@
 	</table>
 	<form th:action="@{/folders}" th:object="${folder}" method="post">
 		<br /> New Folder <br /> 
-		<input type="hidden" th:field="*{id}" /> 
+		<input type="hidden" th:field="*{id}"/>
 		<input type="text" th:field="*{name}" />
 		<input type="submit" value="Add Folder">
 	</form>

@@ -28,5 +28,15 @@ public class UserDao implements IUsersDao {
 	public void saveUser(User user) {
 		em.persist(user);
 	}
+	
+	@Transactional
+	public User getUserById(long id) {
+		return em.find(User.class, id);
+	}
+	
+	@Transactional
+	public User getUserByUsername(String username) {
+		return (User) em.createQuery("from User where username like " + username).getSingleResult();
+	}
 
 }

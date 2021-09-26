@@ -32,10 +32,8 @@
 			</td>
 			<td th:text="${it.name}"></td>
 			<td>
-				<button th:action="@{items/edit/} + ${it.id}"
-					class="btn btn-warning">Edit</button>
-				<button th:action="@{items/delete/} + ${it.id}"
-					class="btn btn-danger">Delete</button>
+				<a th:href="@{/items/edit/} + ${it.id}"class="btn btn-warning">Edit</a>
+				<a th:href="@{/items/delete/} + ${it.id}" class="btn btn-danger">Delete</a>
 			</td>
 		</tr>
 

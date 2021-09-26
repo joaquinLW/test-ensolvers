@@ -23,5 +23,19 @@ public class ItemService implements IItemService {
 	public void saveItem(Item item) {
 		itemDao.saveItem(item);
 	}
+	
+	@Override
+	public Item getItemById(Long id) {
+		return itemDao.getItemById(id);
+	}
+	
+	@Override
+	public void updateItem(Item item) {
+		itemDao.updateItem(item);
+	}
 
+	@Override
+	public void deleteItem(Item item) {
+		itemDao.deleteItem(item);
+	}
 }

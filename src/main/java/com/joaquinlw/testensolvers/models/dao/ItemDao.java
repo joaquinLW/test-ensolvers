@@ -29,5 +29,23 @@ public class ItemDao implements IItemDao {
 	public void saveItem(Item item) {
 		em.persist(item);
 	}
+	
+	@Override
+	@Transactional
+	public Item getItemById(Long id) {
+		return em.find(Item.class, id);
+	}
+	
+	@Override
+	@Transactional
+	public void updateItem(Item item) {
+		em.merge(item);
+	}
+	
+	@Override
+	@Transactional
+	public void deleteItem(Item item) {
+		em.remove(item);
+	}
 
 }

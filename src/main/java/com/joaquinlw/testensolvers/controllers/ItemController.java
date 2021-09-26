@@ -62,4 +62,12 @@ public class ItemController {
 		item = itemService.getItemById(id);
 		return "redirect:/items/" + item.getFolder().getId();
 	}
+	
+	@GetMapping("/items/delete/{id}")
+	public String deleteItem(@PathVariable Long id) {
+		Item item = itemService.getItemById(id);
+		Long folderId = item.getFolder().getId();
+		itemService.deleteItem(item);
+		return "redirect:/items/" + folderId;
+	}
 }

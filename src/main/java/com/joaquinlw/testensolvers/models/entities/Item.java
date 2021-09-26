@@ -34,7 +34,7 @@ public class Item implements Serializable{
 	
 	private boolean done;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="folder_id")
 	private Folder folder;
 	

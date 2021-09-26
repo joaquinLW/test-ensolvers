@@ -22,13 +22,14 @@
 			<td>Action</td>
 		</tr>
 		<tr th:each="it: ${items}">
-			<td>
+			<td class="text-center">
 			<div class="form-check" th:if="${not it.done}">
-			<input type="checkbox" class="form-check-input" id="doneCheckBox" autocomplete="off" />
+			<input type="checkbox" onChange="getDone()" class="form-check-input" id="doneCheckBox" autocomplete="off" disabled/>
 			</div>
 			<div class="form-check" th:if="${it.done}">
-			<input type="checkbox" class="form-check-input" id="doneCheckBox" autocomplete="off" checked/>
+			<input type="checkbox" class="form-check-input" id="doneCheckBox" autocomplete="off" disabled checked/>
 			</div>
+			<a th:href="@{/change/} + ${it.id}" class="btn btn-default">Change</a>
 			</td>
 			<td th:text="${it.name}"></td>
 			<td>

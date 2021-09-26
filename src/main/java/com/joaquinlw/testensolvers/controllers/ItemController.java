@@ -19,24 +19,24 @@ import com.joaquinlw.testensolvers.models.services.IItemService;
 
 @Controller
 public class ItemController {
-	
+
 	@Autowired
 	private IItemService itemService;
-	
+
 	@Autowired
 	private IFolderService folderService;
-	
+
 	@GetMapping("/items/{id}")
 	public String index(Map<String, Object> model, @PathVariable String id) {
 		Item item = new Item();
-		Folder folder = folderService.getFolderById(Long.parseLong(id)); 
+		Folder folder = folderService.getFolderById(Long.parseLong(id));
 		List<Item> items = folder.getItems();
 		model.put("folder", folder);
 		model.put("item", item);
 		model.put("items", items);
 		return "items";
 	}
-	
+
 	@PostMapping("/items/{id}")
 	public String store(@PathVariable Long id, Item item) {
 		item.setDone(false);
@@ -44,7 +44,7 @@ public class ItemController {
 		itemService.saveItem(item);
 		return "redirect:/items/" + id;
 	}
-	
+
 	@GetMapping("/items/edit/{id}")
 	public String edit(Map<String, Object> model, @PathVariable Long id) {
 		Item item = itemService.getItemById(id);
@@ -56,18 +56,26 @@ public class ItemController {
 
 	@PostMapping("/items/edit/{id}")
 	public String updateItem(Item item, @PathVariable Long id) {
-		//Item item = itemService.getItemById(id);
+		// Item item = itemService.getItemById(id);
 		item.setId(id);
 		itemService.updateItem(item);
 		item = itemService.getItemById(id);
 		return "redirect:/items/" + item.getFolder().getId();
 	}
-	
+
 	@GetMapping("/items/delete/{id}")
 	public String deleteItem(@PathVariable Long id) {
 		Item item = itemService.getItemById(id);
 		Long folderId = item.getFolder().getId();
 		itemService.deleteItem(item);
 		return "redirect:/items/" + folderId;
+	}
+
+	@GetMapping("change/{id}")
+	public String change(@PathVariable Long id) {
+		Item item = itemService.getItemById(id);
+		item.setDone(!item.isDone());
+		itemService.updateItem(item);
+		return "redirect:/items/" + item.getFolder().getId();
 	}
 }

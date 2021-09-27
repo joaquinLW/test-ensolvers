@@ -11,8 +11,7 @@
 <title>Edit Folder</title>
 </head>
 <body>
-	<h1 th:text="${title}"></h1>
-	<br />
+	<h1 class="text-center" th:text="${title}"></h1>
 	<br />
 	<div class="container col-md-6">
 		<div class="card border-primary">
@@ -22,9 +21,10 @@
 					th:object="${folder}" method="post">
 					<p>Enter New Folder's Name:</p>
 					<br /> 
-					<input class="col-md-6 text-center" type="text" th:field="*{name}" /> 
+					<input class="col-md-6 text-center form-group" type="text" th:field="*{name}" /> 
 					<input type="hidden" th:field="*{id}"/> <br />
-					<input type="submit" value="Update Folder">
+					<br/>
+					<input class="btn btn-primary" type="submit" value="Update Folder">
 				</form>
 			</div>
 		</div>

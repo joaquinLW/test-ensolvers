@@ -23,20 +23,24 @@
 						<h4>Folders List</h4>
 					</div>
 					<div class="card-body">
-						<table>
+						<table class="table">
+						<thead class="thead-dark">
 							<tr class="text-center">
-								<td>Folder Name</td>
-								<td>Actions</td>
+								<th scope="col">Folder Name</th>
+								<th scope="col">Actions</th>
 							</tr>
+							</thead>
+							<tbody>
 							<tr th:each="fold: ${folders}">
-								<td th:text="${fold.name}"></td>
-								<td><a th:href="@{/items/} + ${fold.id}"
+								<td class="text-center" th:text="${fold.name}"></td>
+								<td class="text-center"><a th:href="@{/items/} + ${fold.id}"
 									class="btn btn-success">See Folder</a> <a
 									th:href="@{/folders/edit/} + ${fold.id}"
 									class="btn btn-warning">Edit</a> <a
 									th:href="@{/folders/delete/} + ${fold.id}"
 									class="btn btn-danger">Delete</a></td>
 							</tr>
+							</tbody>
 						</table>
 					</div>
 				</div>
@@ -44,20 +48,25 @@
 		</div>
 	</div>
 	<br/>
-	<div class="container">
+	<div class="container col-md-5 text-center">
 		<div class="row">
-			<div class="col-md-6 text-center">
+			<div>
 				<div class="card border-primary">
 					<div class="card-header">
 						<label class="text-center">New Folder</label>
 					</div>
 					<div class="card-body">
 						<form th:action="@{/folders}" th:object="${folder}" method="post">
-							<br /> <label>New Folder </label><br /> <input type="hidden"
-								th:field="*{id}" /> <input type="text" th:field="*{name}" /> <br />
+						<div class="form-group">
+						<div class="input-group-text">
+							<br /> <label>New Folder:  </label><br />
+							<input type="hidden" th:field="*{id}" />
+							<input type="text" th:field="*{name}" /> <br />
 							<br />
 							<div class="container col-md-6">
 								<input type="submit" class="btn btn-success" value="Add Folder">
+							</div>
+							</div>
 							</div>
 						</form>
 					</div>

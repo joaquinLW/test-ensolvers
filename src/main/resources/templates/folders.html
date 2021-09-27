@@ -11,32 +11,59 @@
 <title>Folders View</title>
 </head>
 <body>
-	<h1>Folders List</h1>
+	<h1 class="text-center title">Folders List</h1>
 	<br />
 	<br />
 
-	<table th:if="${not folders.isEmpty()}">
-		<tr class="text-center">
-			<td>Folder Name</td>
-			<td>Actions</td>
-		</tr>
-		<tr th:each="fold: ${folders}">
-			<td th:text="${fold.name}"></td>
-			<td>
-				<a th:href="@{/items/} + ${fold.id}" class="btn btn-success">See Folder</a>
-				<a th:href="@{/folders/edit/} + ${fold.id}" class="btn btn-warning">Edit</a>
-				<a th:href="@{/folders/delete/} + ${fold.id}" class="btn btn-danger">Delete</a>
-			</td>
-		</tr>
-
-
-
-	</table>
-	<form th:action="@{/folders}" th:object="${folder}" method="post">
-		<br /> New Folder <br /> 
-		<input type="hidden" th:field="*{id}"/>
-		<input type="text" th:field="*{name}" />
-		<input type="submit" value="Add Folder">
-	</form>
+	<div class="container">
+		<div class="row" th:if="${not folders.isEmpty()}">
+			<div class="container col-md-6">
+				<div class="card border-primary">
+					<div class="card-header text-center">
+						<h4>Folders List</h4>
+					</div>
+					<div class="card-body">
+						<table>
+							<tr class="text-center">
+								<td>Folder Name</td>
+								<td>Actions</td>
+							</tr>
+							<tr th:each="fold: ${folders}">
+								<td th:text="${fold.name}"></td>
+								<td><a th:href="@{/items/} + ${fold.id}"
+									class="btn btn-success">See Folder</a> <a
+									th:href="@{/folders/edit/} + ${fold.id}"
+									class="btn btn-warning">Edit</a> <a
+									th:href="@{/folders/delete/} + ${fold.id}"
+									class="btn btn-danger">Delete</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center">
+				<div class="card border-primary">
+					<div class="card-header">
+						<label class="text-center">New Folder</label>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/folders}" th:object="${folder}" method="post">
+							<br /> <label>New Folder </label><br /> <input type="hidden"
+								th:field="*{id}" /> <input type="text" th:field="*{name}" /> <br />
+							<br />
+							<div class="container col-md-6">
+								<input type="submit" class="btn btn-success" value="Add Folder">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

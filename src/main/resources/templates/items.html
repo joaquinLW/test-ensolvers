@@ -14,41 +14,67 @@
 	<h1>Items List</h1>
 	<br />
 	<br />
-
-	<table th:if="${not items.isEmpty()}">
-		<tr>
-			<td>Done</td>
-			<td>Item</td>
-			<td>Action</td>
-		</tr>
-		<tr th:each="it: ${items}">
-			<td class="text-center">
-			<div class="form-check" th:if="${not it.done}">
-			<input type="checkbox" onChange="getDone()" class="form-check-input" id="doneCheckBox" autocomplete="off" disabled/>
+	<div class="container">
+		<div class="row" th:if="${not items.isEmpty()}">
+			<div class="container col-md-6">
+				<div class="card border-primary">
+					<div class="card-header text-center">
+						<h4>Folders List</h4>
+					</div>
+					<div class="card-body">
+						<table>
+							<tr>
+								<td>Done</td>
+								<td>Item</td>
+								<td>Action</td>
+							</tr>
+							<tr th:each="it: ${items}">
+								<td class="text-center">
+									<div class="form-check" th:if="${not it.done}">
+										<input type="checkbox" onChange="getDone()"
+											class="form-check-input" id="doneCheckBox" autocomplete="off"
+											disabled />
+									</div>
+									<div class="form-check" th:if="${it.done}">
+										<input type="checkbox" class="form-check-input"
+											id="doneCheckBox" autocomplete="off" disabled checked />
+									</div> <a th:href="@{/change/} + ${it.id}" class="btn btn-default">Change</a>
+								</td>
+								<td th:text="${it.name}"></td>
+								<td><a th:href="@{/items/edit/} + ${it.id}"
+									class="btn btn-warning">Edit</a> <a
+									th:href="@{/items/delete/} + ${it.id}" class="btn btn-danger">Delete</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
 			</div>
-			<div class="form-check" th:if="${it.done}">
-			<input type="checkbox" class="form-check-input" id="doneCheckBox" autocomplete="off" disabled checked/>
+		</div>
+	</div>
+	<br/>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center">
+				<div class="card border-primary">
+					<div class="card-header">
+						<label class="text-center">New Folder</label>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/items/} + ${folder.id}" th:object="${item}"
+							method="post">
+							<br /> New Item <br /> <input type="hidden" th:field="*{id}" />
+							<input type="text" th:field="*{name}" /> <input type="hidden"
+								th:field="*{done}" />
+							<!--  		 <input type="hidden" th:field="*{item.folder}" th:value="${folder}"> -->
+							<input type="submit" value="Add Item" />
+						</form>
+						<a th:href="@{/folders}" class="btn btn-primary">Back to
+							Folders</a>
+					</div>
+				</div>
 			</div>
-			<a th:href="@{/change/} + ${it.id}" class="btn btn-default">Change</a>
-			</td>
-			<td th:text="${it.name}"></td>
-			<td>
-				<a th:href="@{/items/edit/} + ${it.id}"class="btn btn-warning">Edit</a>
-				<a th:href="@{/items/delete/} + ${it.id}" class="btn btn-danger">Delete</a>
-			</td>
-		</tr>
-
-
-
-	</table>
-	<form th:action="@{/items/} + ${folder.id}" th:object="${item}" method="post">
-		<br /> New Item <br />
-		 <input type="hidden" th:field="*{id}" /> 
-		 <input	type="text" th:field="*{name}" />
-		 <input type="hidden" th:field="*{done}" />
-<!--  		 <input type="hidden" th:field="*{item.folder}" th:value="${folder}"> -->
-		 <input type="submit" value="Add Item" />
-	</form>
-	<a th:href="@{/folders}" class="btn btn-primary">Back to Folders</a>
+		</div>
+	</div>
 </body>
 </html>

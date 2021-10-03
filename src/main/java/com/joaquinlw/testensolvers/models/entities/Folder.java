@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+
 @Entity
 @Table(name = "folders")
 public class Folder implements Serializable {
@@ -37,7 +39,7 @@ public class Folder implements Serializable {
 
 	private String name;
 
-	@OneToMany(mappedBy = "folder", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "folder", fetch = FetchType.LAZY/*, cascade = CascadeType.ALL */)
 	private List<Item> items;
 
 	/*
@@ -48,15 +50,11 @@ public class Folder implements Serializable {
 
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
+	@CreatedDate
 	private Date createdAt;
 
 	public Folder() {
 		this.items = new ArrayList<>();
-	}
-
-	public Folder(Long id, String name) {
-		this.id = id;
-		this.name = name;
 	}
 
 	public Long getId() {
@@ -87,7 +85,7 @@ public class Folder implements Serializable {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
 

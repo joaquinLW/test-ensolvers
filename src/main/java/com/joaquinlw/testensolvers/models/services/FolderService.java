@@ -1,42 +1,39 @@
 package com.joaquinlw.testensolvers.models.services;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joaquinlw.testensolvers.models.dao.IFolderDao;
+import com.joaquinlw.testensolvers.models.dao.FolderDao;
 import com.joaquinlw.testensolvers.models.entities.Folder;
 
 @Service
-public class FolderService implements IFolderService {
+public class FolderService implements IFolderService{
 
 	@Autowired
-	private IFolderDao folderDao;
+	FolderDao folderDao;
 	
-	@Override
-	public List<Folder> findAll() {
-		return folderDao.findAll();
+	public ArrayList<Folder> findAll() {
+		return (ArrayList<Folder>) folderDao.findAll();
 	}
 
-	@Override
-	public void saveFolder(Folder folder) {
-		folderDao.saveFolder(folder);
+	public Folder saveFolder(Folder folder) {
+		return folderDao.save(folder);
 	}
 
-	@Override
-	public Folder getFolderById(Long id) {
-		return folderDao.getFolderById(id);
+	public Optional<Folder> getFolderById(Long id) {
+		return folderDao.findById(id);
 	}
 	
-	@Override
-	public void updateFolder(Folder folder) {
-		folderDao.updateFolder(folder);
-	}
-	
-	@Override
-	public void deleteFolder(Folder folder) {
-		folderDao.deleteFolder(folder);
+	public boolean deleteFolder(Long folder) {
+		try {
+			folderDao.deleteById(folder);
+			return true;
+		} catch(Exception ex) {
+			return false;
+		}
 	}
 
 }

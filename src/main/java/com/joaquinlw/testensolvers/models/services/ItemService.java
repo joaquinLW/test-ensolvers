@@ -1,41 +1,47 @@
 package com.joaquinlw.testensolvers.models.services;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joaquinlw.testensolvers.models.dao.IItemDao;
+import com.joaquinlw.testensolvers.models.dao.ItemDao;
 import com.joaquinlw.testensolvers.models.entities.Item;
 
 @Service
 public class ItemService implements IItemService {
 
 	@Autowired
-	private IItemDao itemDao;
+	private ItemDao itemDao;
 	
 	@Override
-	public List<Item> findAll() {
-		return itemDao.findAll();
+	public ArrayList<Item> findAll() {
+		return (ArrayList<Item>) itemDao.findAll();
 	}
 
 	@Override
-	public void saveItem(Item item) {
-		itemDao.saveItem(item);
+	public Item saveItem(Item item) {
+		return itemDao.save(item);
 	}
 	
 	@Override
-	public Item getItemById(Long id) {
-		return itemDao.getItemById(id);
+	public Optional<Item> getItemById(Long id) {
+		return itemDao.findById(id);
 	}
 	
 	@Override
-	public void updateItem(Item item) {
-		itemDao.updateItem(item);
+	public boolean deleteItem(Long id) {
+		try {
+			itemDao.deleteById(id);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
 	}
-
+	
 	@Override
-	public void deleteItem(Item item) {
-		itemDao.deleteItem(item);
+	public ArrayList<Item> getItemsByFolderId(Long id){
+		return itemDao.findByFolderId(id);
 	}
 }
